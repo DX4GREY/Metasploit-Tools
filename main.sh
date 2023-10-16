@@ -128,6 +128,7 @@ checkPackage() {
             else
                 sudo apt install metasploit-framework
             fi
+            exit 1
         else
             echo "Install aborted!."
             exit 1
