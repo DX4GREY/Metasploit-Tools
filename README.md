@@ -22,15 +22,15 @@ To install Metasploit Tools, follow these steps:
    cd metasploit-tools
    ```
 
-3. Make sure the `build.sh` script is executable:
+3. Make sure the `install.sh` script is executable:
    ```bash
-   chmod +x build.sh
+   chmod +x install.sh
    ```
 
-4. Run the `build.sh` script to set up Metasploit Framework on your system (Note: You might need superuser or root permissions on some systems):
+4. Run the `install.sh` script to set up Metasploit Framework on your system (Note: You might need superuser or root permissions on some systems):
 
    ```bash
-   ./build.sh
+   ./install.sh
    ```
 
 5. Follow the prompts to complete the installation.
