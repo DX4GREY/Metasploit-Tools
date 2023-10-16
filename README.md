@@ -12,6 +12,11 @@ Metasploit Tools is a collection of scripts to streamline Metasploit Framework-r
 
 ## Installation
 
+One line installation:
+   ```bash
+   git clone https://github.com/DX4GREY/metasploit-tools.git && cd metasploit-tools && bash install.sh
+   ```
+
 To install Metasploit Tools, follow these steps:
 
 1. Open your terminal (in this example, we're using Termux on Android).
