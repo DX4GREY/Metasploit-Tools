@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 export RUBYOPT=-W0
 reset_color="\033[0m"
 red_color="\033[31m"
@@ -200,10 +200,15 @@ inputHost() {
     done
 }
 checkFileHost() {
-    if [ -e ~/.defaulthost.msf ]; then
+    if [ "$1" = "p" ]; then
+        hosts=~/.Pdefaulthost.msf
+    elif [ "$1" = "r" ]; then
+        hosts=~/.Rdefaulthost.msf
+    fi
+    if [ -e $hosts ]; then
         echo -n -e "${blue_color}[*]${reset_color} Use default host? (Y/n)"; read usedefaulthost
         if ! [[ "$usedefaulthost" = "n" || "$usedefaulthost" = "N" ]]; then
-            ip_and_port="$(cat ~/.defaulthost.msf)"
+            ip_and_port="$(cat $hosts)"
             lhost=$(echo "$ip_and_port" | cut -d':' -f1)
             lport=$(echo "$ip_and_port" | cut -d':' -f2) 
         else
@@ -216,11 +221,15 @@ checkFileHost() {
 setMsfParameter() {
     case "$1" in
         "gethost") 
-        checkFileHost
+        checkFileHost "$2"
         ;;
         "host")
         inputHost
-        echo "$lhost:$lport" > ~/.defaulthost.msf
+        if [ "$2" = "p" ]; then
+            echo "$lhost:$lport" > ~/.Pdefaulthost.msf
+        elif [ "$2" = "r" ]; then
+            echo "$lhost:$lport" > ~/.Rdefaulthost.msf
+        fi
         ;;
     esac
 }
@@ -249,7 +258,7 @@ payloadCreatorActivity() {
     payloadMenus
     echo -n -e "${blue_color}[*]${reset_color} Payload> "; read payloadselect
     selectPayload "$payloadselect"
-    setMsfParameter gethost
+    setMsfParameter gethost p
     echo -n -e "${blue_color}[*]${reset_color} Format> "; read format
     echo -n -e "${blue_color}[*]${reset_color} Out> "; read out
     generate "$target" "$lhost" "$lport" "$format" "$out"
@@ -259,13 +268,19 @@ remoteActivity() {
     payloadMenus
     echo -n -e "${blue_color}[*]${reset_color} Payload> "; read payloadselect
     selectPayload "$payloadselect"
-    setMsfParameter gethost
+    setMsfParameter gethost r
     remote "$target" "$lhost" "$lport"
 }
-setHostActivity() {
+setPayloadHostActivity() {
     showTitle "Set Default Host Payload"
     echo
-    setMsfParameter host
+    setMsfParameter host p
+    echo -e "${green_color}[*]${reset_color} Done"
+}
+setRemoteHostActivity() {
+    showTitle "Set Remote Default Host"
+    echo
+    setMsfParameter host r
     echo -e "${green_color}[*]${reset_color} Done"
 }
 mainActivity() {
@@ -278,7 +293,8 @@ mainActivity() {
             items=("Payload creator with msfvenom"
                    "Remote access payload (msfconsole)"
                    "Jump to msfconsole"
-                   "Set default lhost or lport"
+                   "Set default lhost or lport payload"
+                   "Set remote access default lhost or lport"
                    "Show default Host") 
             showMenus "${items[@]}"
             echo -e "${green_color}[${reset_color}0${green_color}]${reset_color} Exit"
@@ -287,14 +303,20 @@ mainActivity() {
                 1) clear && payloadCreatorActivity;;
                 2) clear && remoteActivity;;
                 3) echo -e "${blue_color}[*]${reset_color} Running msfconsole..." && msfconsole -q;;
-                4) clear && setHostActivity;;
-                5)
-                if [ -e ~/.defaulthost.msf ]; then
+                4) clear && setPayloadHostActivity;;
+                5) clear && setRemoteHostActivity;;
+                6)
+                if [ -e ~/.Pdefaulthost.msf ]; then
                     echo
-                    echo -e "${blue_color}[*]${reset_color} Default Hosts : $(cat ~/.defaulthost.msf)"
+                    echo -e "${blue_color}[*]${reset_color} Payload Default Hosts : $(cat ~/.Pdefaulthost.msf)"
                 else
                     echo
-                    echo -e "${red_color}[*]${reset_color} Default host not be set"
+                    echo -e "${red_color}[*]${reset_color} Payload default host not be set"
+                fi
+                if [ -e ~/.Rdefaulthost.msf ]; then
+                    echo -e "${blue_color}[*]${reset_color} Remote Default Hosts : $(cat ~/.Rdefaulthost.msf)"
+                else
+                    echo -e "${red_color}[*]${reset_color} Remote default host not be set"
                 fi
                 ;;
                 0) exit 1;;
