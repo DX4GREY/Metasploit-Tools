@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 export RUBYOPT=-W0
 reset_color="\033[0m"
 red_color="\033[31m"

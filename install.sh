@@ -41,6 +41,7 @@ clear
 showTitle "Installation scripts"
 echo
 echo -n "Building scripts..."
+
 shc -f main.sh -o msftools
 if [ -e main.sh.x.c ]; then
     rm -rf main.sh.x.c
