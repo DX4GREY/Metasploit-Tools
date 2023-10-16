@@ -2,7 +2,7 @@
 
 Metasploit Tools is a collection of scripts to streamline Metasploit Framework-related tasks, including payload generation and remote access payloads. These tools are designed to simplify the Metasploit workflow and enhance your experience.
 
-![Metasploit Tools](screenshots.png)
+![Metasploit Tools](screenshots.jpg)
 
 ## Features
 
@@ -38,14 +38,14 @@ To install Metasploit Tools, follow these steps:
 6. Once the installation is finished, you can access the tools by running:
 
    ```bash
-   ./msf-tools
+   msftools
    ```
 
 7. Enjoy using Metasploit Tools for various tasks related to the Metasploit Framework!
 
 ## Usage
 
-1. After installation, you can run `./msf-tools` to access the main menu of Metasploit Tools.
+1. After installation, you can run `msftools` to access the main menu of Metasploit Tools.
 
 2. Follow the on-screen instructions to use the different features, such as payload generation, setting default hosts, and launching the Metasploit Framework.
 
@@ -60,7 +60,7 @@ To uninstall Metasploit Tools:
 3. Run the following command (you might need superuser permissions):
 
    ```bash
-   ./msf-tools -u
+   msftools -u
    ```
 
 4. The uninstall process will remove the Metasploit Framework and the tools from your system.
