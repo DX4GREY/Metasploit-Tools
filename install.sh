@@ -41,7 +41,7 @@ clear
 showTitle "Installation scripts"
 echo
 echo -n "Building scripts..."
-if [ command -v shc ]; then
+if [ $(command -v shc) ]; then
     shc -f main.sh -o msftools
 fi
 if [ -e main.sh.x.c ]; then
