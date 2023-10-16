@@ -81,6 +81,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Special thanks to Dx4 for the original codebase.
 - Contributors to the Metasploit Framework.
 
-Feel free to contribute or report issues on the [GitHub repository](https://github.com/yourusername/metasploit-tools).
+Feel free to contribute or report issues on the [GitHub repository](https://github.com/dx4grey/metasploit-tools/issues).
 
 Happy Hacking!
