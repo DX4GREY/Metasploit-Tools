@@ -41,8 +41,9 @@ clear
 showTitle "Installation scripts"
 echo
 echo -n "Building scripts..."
-
-shc -f main.sh -o msftools
+if [ command -v shc ]; then
+    shc -f main.sh -o msftools
+fi
 if [ -e main.sh.x.c ]; then
     rm -rf main.sh.x.c
     echo -e "\rBuilding scripts ${brown_color}[${green_color}√${brown_color}]${reset_color}"
