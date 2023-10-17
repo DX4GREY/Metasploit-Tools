@@ -62,7 +62,7 @@ else
     path="/usr/local/bin/msftools"
 fi
 rm -rf msftools
-if [ -e $PREFIX/bin/msftools ]; then
+if [ -e $path ]; then
     echo -e "\rInstalling to path ${brown_color}[${green_color}√${brown_color}]${reset_color}"
     echo "Just run : msftools"
 else
